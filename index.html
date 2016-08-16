@@ -278,7 +278,7 @@ $ git log v2.5.. Makefile       # commits since v2.5 which modify
 					<section>
 						<h3>Git Daemon</h3>
 						<pre><code class="hljs" data-trim>
-git daemon --verbose --export-all --base-path=.
+$ git daemon --base-path=. --export-all --enable=receive-pack --reuseaddr --informative-errors --verbose
 						</code></pre>
 					</section>
 				</section>
