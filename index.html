@@ -61,7 +61,7 @@
 					<section>
 						<h2>Description</h2>
 						<p>Git is a fast, scalable, distributed revision control system with an unusually rich command set that provides both high-level operations and full access to internals.</p>
-						<p>Works with ssh or git protocol (listens on port 9418)</p>
+						<p>Works with ssh or git protocol (git daemon listens on port 9418)</p>
 					</section>
 					<section>
 						<div onclick="zoom.to({element: this})">
@@ -81,6 +81,7 @@
 							<li>Managing Branches</li>
 							<li>Using GIT for Collaboration</li>
 							<li>Exploring History</li>
+							<li>Git Daemon</li>
 						</ul>
 					</section>
 					<section>
@@ -271,6 +272,13 @@ $ git log v2.5..                # commits since v2.5
 $ git log --since="2 weeks ago" # commits from the last 2 weeks
 $ git log v2.5.. Makefile       # commits since v2.5 which modify
                                 # Makefile
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Git Daemon</h3>
+						<pre><code class="hljs" data-trim>
+git daemon --verbose --export-all --base-path=.
 						</code></pre>
 					</section>
 				</section>
