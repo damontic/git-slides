@@ -59,6 +59,18 @@
 
 				<section data-background="./images/S4N.png" data-state="img-top-right" data-background-size="250px">
 					<section>
+						<h2>Description</h2>
+						<p>Git is a fast, scalable, distributed revision control system with an unusually rich command set that provides both high-level operations and full access to internals.</p>
+					</section>
+					<section>
+						<div onclick="zoom.to({element: this})">
+       						<img src='./images/git-model.png' width="50%" height="50%"/>
+       					</div>
+					</section>
+				</section>
+
+				<section data-background="./images/S4N.png" data-state="img-top-right" data-background-size="250px">
+					<section>
 						<h2>Git Tutorial</h2>
 						<ul>
 							<li>Importing a new Project</li>
@@ -70,17 +82,211 @@
 							<li>Exploring History</li>
 						</ul>
 					</section>
+					<section>
+						<h3>Importing a new Project</h3>
+						<pre><code class="hljs" data-trim>
+$ tar xzf project.tar.gz
+$ cd project
+$ git init
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git add .
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git commit
+						</code></pre>
+					</section>
+					<section>
+						<h3>Making Changes</h3>
+						<pre><code class="hljs" data-trim>
+$ git add file1 file2 file3
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git diff --cached
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git status
+   On branch master
+   Changes to be committed:
+   Your branch is up-to-date with 'origin/master'.
+     (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+           modified:   file1
+           modified:   file2
+           modified:   file3
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git commit
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git commit -a
+						</code></pre>
+					</section>
+					<section>
+						<h3>Git tracks Contents, not Files</h3>
+						<blockquote>
+Many revision control systems provide an <b>add</b> command that tells the system to start tracking changes to a new file. Git’s
+add command does something simpler and more powerful: <u>git add</u> is used both for new and newly modified files, and in both
+cases it takes a snapshot of the given files and stages that content in the index, ready for inclusion in the next commit.
+       					</blockquote>
+					</section>
+					<section>
+						<h3>Viewing Project History</h3>
+						<pre><code class="hljs" data-trim>
+$ git log
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git log -p
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git log --stat --summary
+						</code></pre>
+					</section>
+					<section>
+						<h3>Managing Branches</h3>
+						<pre><code class="hljs" data-trim>
+$ git branch experimental
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git branch
+
+    experimental
+    * master
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git checkout experimental
+# (edit file)
+$ git commit -a
+						</code></pre>
+					</section>
+					<section>
+						<h3>Managing Branches</h3>
+						<pre><code class="hljs" data-trim>
+$ git checkout master
+# (edit file)
+$ git commit -a
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git merge experimental
+$ git diff
+# (resolve conflicts)
+$ git commit -a
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ gitk
+$ git branch -d experimental
+$ git branch -D crazy-idea
+						</code></pre>
+					</section>
+					<section>
+						<h3>Using GIT for Collaboration</h3>
+						<pre><code class="hljs" data-trim>
+bob$ git clone /home/alice/project myrepo
+# (edit files)
+bob$ git commit -a
+# (repeat as necessary)
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+alice$ cd /home/alice/project
+alice$ git pull /home/bob/myrepo master
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+alice$ git fetch /home/bob/myrepo master
+alice$ git log -p HEAD..FETCH_HEAD
+alice$ gitk HEAD..FETCH_HEAD
+alice$ gitk HEAD...FETCH_HEAD
+						</code></pre>
+					</section>
+					<section>
+						<h3>Using GIT for Collaboration</h3>
+						<pre><code class="hljs" data-trim>
+alice$ git remote add bob /home/bob/myrepo
+alice$ git fetch bob
+alice$ git log -p master..bob/master
+alice$ git merge bob/master
+alice$ git pull . remotes/bob/master
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+bob$ git pull
+bob$ git config --get remote.origin.url
+	/home/alice/project
+bob$ git branch -r
+	origin/master
+bob$ git clone alice.org:/home/alice/project myrepo
+						</code></pre>
+					</section>
+					<section>
+						<h3>Exploring History</h3>
+						<pre><code class="hljs" data-trim>
+$ git log
+commit c82a22c39cbc32576f64f5c6b3f24b99ea8149c7
+Author: Junio C Hamano &lt;junkio@cox.net&gt;
+Date:   Tue May 16 17:18:22 2006 -0700
+
+   merge-base: Clarify the comments on post processing.
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git show c82a22c39cbc32576f64f5c6b3f24b99ea8149c7
+$ git show c82a22c39c   # the first few characters of
+			# the name are usually enough
+$ git show HEAD         # the tip of the current branch
+$ git show experimental # the tip of the "experimental" branch
+						</code></pre>
+					</section>
+					<section>
+						<h3>Exploring History</h3>
+						<pre><code class="hljs" data-trim>
+$ git show HEAD^  # to see the parent of HEAD
+$ git show HEAD^^ # to see the grandparent of HEAD
+$ git show HEAD~4 # to see the great-great grandparent of HEAD
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git show HEAD^1 # show the first parent of HEAD (same as HEAD^)
+$ git show HEAD^2 # show the second parent of HEAD
+						</code></pre>
+					</section>
+					<section>
+						<h3>Exploring History</h3>
+						<pre><code class="hljs" data-trim>
+$ git tag v2.5 1b2e1d63ff
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git diff v2.5 HEAD 	 # compare the current HEAD to v2.5
+$ git branch stable v2.5 # start a new branch named "stable" based
+			 # at v2.5
+$ git reset --hard HEAD^ # reset your current branch and working
+			 # directory to its state at HEAD^
+						</code></pre>
+					</section>
+					<section>
+						<h3>Exploring History</h3>
+						<pre><code class="hljs" data-trim>
+$ git grep "hello" v2.5
+$ git grep "hello"
+						</code></pre>
+						<pre><code class="hljs" data-trim>
+$ git log v2.5..v2.6            # commits between v2.5 and v2.6
+$ git log v2.5..                # commits since v2.5
+$ git log --since="2 weeks ago" # commits from the last 2 weeks
+$ git log v2.5.. Makefile       # commits since v2.5 which modify
+                                # Makefile
+						</code></pre>
+					</section>
 				</section>
 
 				<section data-background="./images/S4N.png" data-state="img-top-right" data-background-size="250px">
 					<section>
 						<h2>Further Reading</h2>
-						<ul>
+						<ol>
 						<li>man gittutorial</li>
 						<li>man giteveryday</li>
 						<li>man gitworkflows</li>
+						<li>man gitcore-tutorial</li>
 						<li>man gitcvs-migration</li>
-						</ul>
+						<li><a href="https://hintjens.gitbooks.io/scalable-c/content/chapter1.html#problem-we-need-to-backup-and-share-our-work">Just one branch</a></li>
+						<li><a href="http://nvie.com/posts/a-successful-git-branching-model/">git flow</a></li>
+						<li><a href='http://learngitbranching.js.org/'>learn git branching</a></li>
+						</ol>
 					</section>
 				</section>
 
@@ -101,7 +307,8 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					// { src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
 				]
 			});
 		</script>
